@@ -1,0 +1,98 @@
+
+<html>
+<head>
+    <title>自动投票小能手</title>
+    <meta http-equiv="Access-Control-Allow-Origin" content="*" charset=UTF-8>
+    <script src="js/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript">
+	
+        function vote() {
+        	//获取投票次数
+        	var num = document.getElementById("num").value;
+			
+			if (num == '') {
+				num = 0;
+			}
+			
+			
+        	//生成随机的姓名
+        	var arr = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','1','2','3','4','5','6','7','8','9','0'];
+ 			
+			
+
+
+			// 自动投票
+        	for (var i = 0; i < num; i++) {
+			
+				//自动生成名
+				var fname ='';
+				var n = Math.floor(Math.random()*7+4);
+				for(var j = 0; j < n; j++){
+					fname += arr[Math.floor(Math.random()*36)];
+				}
+				
+				
+				// 自动生成姓
+				var lname = '';
+				var m = Math.floor(Math.random()*4+2);
+				for(var j = 0; j < m; j++){
+					lname += arr[Math.floor(Math.random()*36)];
+				}
+				
+				
+				// 自动生成随机邮箱
+				var email = ''; 
+				for(var j = 0; j < 9; j++){ 
+					email += Math.floor(Math.random()*10); 
+				} 
+				
+				
+				var resultJSON = "first_name=" + fname + "&last_name=" + lname + "&email=" + email + "%40qq.com&cat_id=367&post_id=52845&action=register_vote";
+				
+				sleep(500);
+				
+				$.ajax({
+					type: "POST",//方法类型
+					dataType: "json",//预期服务器返回的数据类型
+					url: "https://www.internationaldesignexcellenceawards.com/wp-content/plugins/wp-sbid-awards/handlers/ajax.php" ,//url
+					data: resultJSON,
+					success: function (result) {
+					
+					},
+					error: function (xhr, textStatus, errorThrown) {
+		　　　　　　	
+			　　　　} 
+				});
+           }
+		   
+		   alert("恭喜！您成功投票（ " + num + " 次）");
+        }
+		
+		
+        function sleep(time) {
+			var startTime = new Date().getTime() + parseInt(time, 10);
+			while(new Date().getTime() < startTime) {}
+		};
+		
+		
+
+    </script>
+</head>
+<body>
+<div style="margin-top:50px;margin-left:30px;">
+	自动投票小能手
+</div>
+<div id="form-div" style="margin-top:50px;margin-left:30px;">
+    <form id="form1" onsubmit="return false" action="##" method="post">
+    	请输入投票次数：<input type="text" id="num" name="num" value="100">
+        <input type="hidden" id="cat_id" name="cat_id" value="367">
+        <input type="hidden" id="post_id" name="post_id" value="52845">
+		<br>
+		<br>
+		
+        <input style="font-size:20px;background-color:green;color:white;" type="button" value="点击后自动投票" onclick="vote()"/>
+		
+    </form>
+</div>
+</body>
+</html>
