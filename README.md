@@ -1,2 +1,2 @@
 # vote
-## 对一个网站简单的进行自动投票
+## Simple automatic voting program
